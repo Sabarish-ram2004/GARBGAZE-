@@ -19,137 +19,11 @@
   <!-- Favicon -->
   <link rel="icon" href="../Logo/favicon.ico" type="image/x-icon" />
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #f9f9f9, #fff);
-      background-attachment: fixed;
-    }
-
-    .navbar {
-      background-color: rgba(255, 255, 255, 0.95) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: chocolate;
-    }
-
-    .navbar-nav .nav-link {
-      font-weight: 500;
-      color: #333;
-      margin-right: 15px;
-    }
-
-    .navbar-nav .nav-link:hover {
-      color: chocolate;
-    }
-
-    .icon-links img {
-      width: 26px;
-      height: 26px;
-      transition: transform 0.3s;
-    }
-
-    .icon-links img:hover {
-      transform: scale(1.2);
-    }
-
-    .carousel-inner img {
-      height: 400px;
-      object-fit: cover;
-    }
-
-    .carousel {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero {
-      background: url('hero-bg.jpg') center/cover;
-      padding: 100px 20px;
-      text-align: center;
-      color: rgb(225, 113, 65);
-    }
-
-    .btn-dark {
-      background: linear-gradient(to right, #4e342e, #bf360c);
-      border: none;
-    }
-
-    .btn-dark:hover {
-      background: linear-gradient(to right, #6d4c41, #e64a19);
-    }
-
-    .search-container {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .product-section {
-      padding: 40px 20px;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-    }
-
-    .card {
-      border: none;
-      border-radius: 12px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card img {
-      height: 300px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    .card:hover img {
-      transform: scale(1.05);
-    }
-
-    .footer {
-      padding: 20px;
-      text-align: center;
-      background-color: #222;
-      color: #fff;
-    }
-
-    .subscribe {
-      background: #eee;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .floating-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    @media (max-width: 768px) {
-      .carousel-inner img {
-        height: 250px;
-      }
-
-      .card img {
-        height: 200px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
@@ -160,24 +34,27 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav me-auto ms-3 mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="#">MEN</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">WOMEN</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">KIDS</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">GENZ</a></li>
+        <ul class="navbar-nav me-auto ms-3 mb-2 mb-lg-0" id="categoryButtons">
+          <!-- Filter buttons generated dynamically -->
         </ul>
         <form class="d-flex search-container mb-2 mb-lg-0">
-          <input class="form-control me-2" type="search" placeholder="Search for products..." />
-          <button class="btn btn-outline-dark" type="submit">Search</button>
+          <input class="form-control me-2" id="searchInput" type="search" placeholder="Search for products..." />
         </form>
-        <div class="d-flex icon-links align-items-center gap-3 ms-lg-4 mt-2 mt-lg-0">
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Cart" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="User" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Wishlist" /></a>
-        </div>
       </div>
     </div>
   </nav>
+
+
+<!-- Mini Cart -->
+<div id="cart">
+  <h4>My Cart</h4>
+  <div id="cartItems"></div>
+  <hr>
+  <div id="cartTotal" class="fw-bold text-end">Total: ₹0</div>
+  <button id="checkoutBtn" class="btn btn-dark w-100 mt-2">Checkout</button>
+</div>
+
+
 
   <!-- Hero Section -->
   <section class="hero">
@@ -189,71 +66,23 @@
   <!-- Carousel -->
   <div class="container my-4">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="IMG-20250318-WA0024.jpg" class="d-block w-100" alt="Slide 1" />
-        </div>
-        <div class="carousel-item">
-          <img src="ZIPPER1.jpg" class="d-block w-100" alt="Slide 2" />
-        </div>
-        <div class="carousel-item">
-          <img src="IMG-20250318-WA0027.jpg" class="d-block w-100" alt="Slide 3" />
-        </div>
+      <div class="carousel-inner" id="carouselSlides">
+        <!-- Slides generated dynamically -->
       </div>
     </div>
   </div>
 
-  <!-- Filter Buttons -->
-  <div class="text-center my-4">
-    <button class="btn btn-outline-dark mx-2">All</button>
-    <button class="btn btn-outline-dark mx-2">Men</button>
-    <button class="btn btn-outline-dark mx-2">Women</button>
-    <button class="btn btn-outline-dark mx-2">Kids</button>
-  </div>
-
-  <!-- Product Cards -->
+  <!-- Product Section -->
   <div class="product-section text-center">
     <h2 class="mb-4">Trending Outfits</h2>
     <div class="container">
-      <div class="row g-4">
-        <div class="col-md-4" data-aos="fade-up">
-          <div class="card h-100">
-            <img src="Indie-girl.jpg" class="card-img-top" alt="Outfit 1">
-            <div class="card-body">
-              <h5 class="card-title">Indie Look</h5>
-              <div class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-              <p class="card-text">Unleash your inner vibes with this unique outfit.</p>
-              <a href="#" class="btn btn-dark w-100">Buy</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card h-100">
-            <img src="pexels-prayoon-sajeev-1486107-2897531.jpg" class="card-img-top" alt="Outfit 2">
-            <div class="card-body">
-              <h5 class="card-title">Summer Breeze</h5>
-              <div class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <p class="card-text">Feel light and fresh this summer with pastel shades.</p>
-              <a href="#" class="btn btn-dark w-100">Buy</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="card h-100">
-            <img src="IMG-20250318-WA0021.jpg" class="card-img-top" alt="Outfit 3">
-            <div class="card-body">
-              <h5 class="card-title">Street Casual</h5>
-              <div class="text-warning">&#9733; &#9733; &#9733; &#9734; &#9734;</div>
-              <p class="card-text">Trendy. Tough. Timeless. Make a bold street-style statement.</p>
-              <a href="#" class="btn btn-dark w-100">Buy</a>
-            </div>
-          </div>
-        </div>
+      <div class="row g-4" id="productContainer">
+        <!-- Products generated dynamically -->
       </div>
     </div>
   </div>
 
-  <!-- Login -->
+  <!-- Login Section -->
   <section class="subscribe">
     <h4>Jump into our store</h4>
     <form class="d-flex justify-content-center mt-3">
@@ -274,6 +103,9 @@
   <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
 </body>
 
 </html>
